@@ -6,6 +6,7 @@ public class PlayerJumper : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private float _jumpForce;
+    [SerializeField] private PlayerAnimations _playerAnimations;
 
     private bool _isGrounded;
 
@@ -19,6 +20,7 @@ public class PlayerJumper : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded == true)
         {
             _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            _playerAnimations.Jump();
         }
     }
 
@@ -27,6 +29,7 @@ public class PlayerJumper : MonoBehaviour
         if(collision.gameObject.TryGetComponent(out Ground ground))
         {
             _isGrounded = true;
+            _playerAnimations.Run();
         }
     }
 
